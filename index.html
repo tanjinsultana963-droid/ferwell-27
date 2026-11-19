@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>SSC Batch 2027 | The Last Chapter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080808;
+  --gold:#d6ad55;
+  --light:#f5e5b4;
+  --white:#f5f0e5;
+}
+
+* {margin:0;padding:0;box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  background:var(--bg);
+  color:var(--white);
+  font-family:Poppins,sans-serif;
+  overflow-x:hidden;
+}
+.hidden {display:none!important}
+
+.gold-line {
+  width:85px;height:2px;margin:22px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.eyebrow {
+  color:var(--gold);letter-spacing:4px;
+  font-size:10px;margin-bottom:18px;
+}
+.gold-btn {
+  display:inline-block;padding:14px 23px;
+  border:1px solid var(--gold);
+  background:linear-gradient(120deg,#956a27,#f5dc91,#a77c31);
+  color:#100d06;font-size:11px;font-weight:700;
+  letter-spacing:2px;cursor:pointer;text-decoration:none;
+  transition:.3s;
+}
+.gold-btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 25px #d6ad5580;
+}
+button,input {font-family:inherit}
+button:disabled {opacity:.6;cursor:not-allowed}
+
+/* LOGIN */
+
+#loginScreen {
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:radial-gradient(ellipse,#30230f,#100d08 50%,#050505);
+}
+.orbit {
+  position:absolute;border:1px solid #d6ad5530;
+  border-radius:50%;animation:rotate 25s linear infinite;
+  pointer-events:none;
+}
+.orbit.one {width:min(550px,90vw);height:min(550px,90vw)}
+.orbit.two {
+  width:min(780px,120vw);height:min(780px,120vw);
+  animation-direction:reverse;
+}
+@keyframes rotate {to{transform:rotate(360deg)}}
+
+.login-card {
+  position:relative;z-index:2;width:90%;max-width:430px;
+  padding:42px 28px;text-align:center;
+  border:1px solid #d6ad5590;background:#0c0c0cee;
+  box-shadow:0 0 50px #d6ad5520;
+  animation:loginEnter 1.2s ease both;
+}
+@keyframes loginEnter {
+  from {opacity:0;transform:translateY(60px) scale(.85);filter:blur(10px)}
+  to {opacity:1;transform:none;filter:blur(0)}
+}
+.crown {
+  color:var(--gold);font-size:48px;
+  animation:crown 2s infinite alternate;
+  text-shadow:0 0 25px var(--gold);
+}
+@keyframes crown {to{transform:translateY(-7px)}}
+.login-card h1 {
+  font:600 48px 'Cormorant Garamond',serif;margin-top:8px;
+}
+.login-card h2 {font-size:12px;letter-spacing:2px;font-weight:300}
+.login-card h3 {margin-top:18px;letter-spacing:4px}
+.login-card h3 span {color:var(--gold)}
+.login-copy {font-size:11px;color:#aaa;margin:25px 0;line-height:1.8}
+#password {
+  width:100%;padding:15px;background:#171717;
+  border:1px solid #59451e;color:white;
+  text-align:center;outline:none;letter-spacing:3px;
+}
+#password:focus {
+  border-color:var(--gold);box-shadow:0 0 20px #d6ad5540;
+}
+#loginError {min-height:30px;padding-top:10px;font-size:11px}
+#unlock {width:100%}
+.login-footer {
+  margin-top:25px;color:var(--gold);
+  font-size:9px;letter-spacing:3px;
+}
+.particle {
+  position:absolute;width:3px;height:3px;
+  background:var(--gold);border-radius:50%;
+  box-shadow:0 0 10px var(--gold);
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp {
+  from {transform:translateY(105vh);opacity:0}
+  20%,80% {opacity:1}
+  to {transform:translateY(-20px);opacity:0}
+}
+.shake {animation:shake .4s!important}
+@keyframes shake {
+  25% {transform:translateX(-10px)}
+  75% {transform:translateX(10px)}
+}
+.exit {animation:fadeOut 1s forwards!important}
+@keyframes fadeOut {
+  to {opacity:0;transform:scale(1.3);filter:blur(12px)}
+}
+
+/* HEADER */
+
+header {
+  position:sticky;top:0;z-index:50;background:#090909;
+  border-bottom:1px solid #49371b;padding:17px 7%;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.logo {font-weight:700;font-size:20px}
+.logo span {color:var(--gold)}
+nav {display:flex;gap:23px}
+nav a {color:#ddd;text-decoration:none;font-size:11px}
+nav a:hover {color:var(--gold)}
+.menu {
+  display:none;background:none;color:var(--gold);
+  border:1px solid var(--gold);padding:6px 10px;cursor:pointer;
+}
+
+/* HERO */
+
+.hero {
+  min-height:88vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:60px 20px;position:relative;
+  background:linear-gradient(#0009,#000d),
+  radial-gradient(ellipse,#4b3514,#080808 70%);
+}
+.hero h1 {
+  font:600 clamp(45px,10vw,95px)/1.1 'Cormorant Garamond',serif;
+  letter-spacing:4px;
+}
+.hero h1 span,.hero h2,.content h2 span {color:var(--gold)}
+.hero h2 {font-size:18px;letter-spacing:7px;margin-top:15px}
+.hero-desc {
+  max-width:550px;color:#bbb;line-height:2;
+  font-size:13px;margin:20px auto 30px;
+}
+.hero-bottom {
+  position:absolute;bottom:25px;
+  color:var(--gold);font-size:9px;letter-spacing:3px;
+}
+
+/* SECTIONS */
+
+section.content {padding:90px 7%;text-align:center}
+section.content h2 {
+  font:600 clamp(35px,6vw,55px) 'Cormorant Garamond',serif;
+}
+.story,.teachers {background:#101010}
+.section-copy {
+  max-width:700px;margin:20px auto;
+  color:#bbb;font-size:13px;line-height:2;
+}
+.quote {
+  margin:30px auto 0;color:var(--light);
+  font:italic 22px 'Cormorant Garamond',serif;
+  max-width:650px;
+}
+
+/* GALLERY */
+
+.gallery-section {background:#080808}
+.upload {
+  display:inline-block;padding:13px 22px;margin:25px 0 10px;
+  border:1px solid var(--gold);color:var(--gold);
+  cursor:pointer;font-size:11px;letter-spacing:2px;
+}
+.upload:hover {background:var(--gold);color:black}
+.note {font-size:10px;color:#888;margin-bottom:25px}
+.gallery {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;max-width:1100px;margin:auto;
+}
+.photo {
+  height:240px;position:relative;overflow:hidden;
+  border:1px solid #72552a;
+}
+.photo img {
+  width:100%;height:100%;object-fit:cover;transition:.4s;
+}
+.photo:hover img {transform:scale(1.08)}
+.remove {
+  position:absolute;right:8px;top:8px;
+  background:#000c;color:white;border:1px solid var(--gold);
+  padding:6px 10px;cursor:pointer;
+}
+.empty {
+  grid-column:1/-1;padding:50px;
+  border:1px dashed #705526;color:#aaa;
+}
+
+/* TEACHERS */
+
+.teacher-card {
+  max-width:650px;margin:40px auto 0;padding:40px 25px;
+  border:1px solid #72552a;
+  background:linear-gradient(135deg,#19150d,#090909);
+}
+.teacher-card .flower {font-size:45px;color:var(--gold)}
+.teacher-card h3 {
+  font:600 28px 'Cormorant Garamond',serif;
+  color:var(--gold);margin:15px 0;
+}
+.teacher-card p {color:#bbb;font-size:13px;line-height:2}
+.signature {color:var(--gold)!important;margin-top:20px}
+
+/* COUNTDOWN */
+
+.countdown-section {
+  background:radial-gradient(ellipse,#241b0d,#080808 70%);
+}
+.date-controls {
+  display:flex;justify-content:center;
+  gap:10px;flex-wrap:wrap;margin:30px 0;
+}
+.date-controls input {
+  padding:12px;background:#151515;
+  border:1px solid var(--gold);color:white;
+  max-width:100%;
+}
+.countdown {
+  display:flex;justify-content:center;flex-wrap:wrap;gap:13px;
+}
+.time-box {
+  width:120px;padding:22px 10px;
+  border:1px solid #8b6a30;background:#100e0a;
+}
+.time-box strong {
+  display:block;color:var(--gold);
+  font:600 43px 'Cormorant Garamond',serif;
+}
+.time-box span {font-size:9px;letter-spacing:2px}
+
+/* FOOTER */
+
+footer {
+  text-align:center;padding:60px 20px;
+  background:#050505;border-top:1px solid #49371b;
+}
+footer h2 {
+  font:600 30px 'Cormorant Garamond',serif;
+  letter-spacing:4px;margin:15px 0;
+}
+footer p {font-size:12px;color:#aaa}
+footer .star {font-size:35px;color:var(--gold)}
+
+/* GOODBYE */
+
+#goodbyeScreen {
+  position:fixed;inset:0;z-index:2000;
+  display:flex;justify-content:center;align-items:center;
+  text-align:center;padding:20px;overflow:hidden;
+  background:radial-gradient(ellipse,#382710,#090806 75%);
+  animation:reveal 1.5s ease both;
+}
+@keyframes reveal {from{opacity:0}to{opacity:1}}
+.goodbye-content {position:relative;z-index:2}
+.heart {
+  color:var(--gold);font-size:65px;
+  animation:heartbeat 1.4s infinite;
+}
+@keyframes heartbeat {50%{transform:scale(1.2)}}
+.goodbye-content h1 {
+  color:var(--gold);
+  font:600 clamp(55px,12vw,105px) 'Cormorant Garamond',serif;
+  letter-spacing:7px;
+}
+.goodbye-content h2 {letter-spacing:5px;font-size:20px}
+.bangla {
+  color:#e2d7c2;line-height:2;
+  font-size:13px;margin:25px 0;
+}
+.goodbye-content h3 {color:var(--gold);letter-spacing:4px;font-size:11px}
+.confetti,.falling-flower {
+  position:absolute;top:-30px;animation:fall linear forwards;
+}
+.confetti {width:8px;height:13px}
+.falling-flower {font-size:22px}
+@keyframes fall {
+  to {transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* REVEAL ANIMATION */
+
+.reveal {
+  opacity:0;transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.visible {opacity:1;transform:none}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+  header {flex-wrap:wrap}
+  .menu {display:block}
+  nav {
+    display:none;flex-direction:column;width:100%;padding-top:15px;
+  }
+  nav.open {display:flex}
+  nav a {padding:8px 0;border-top:1px solid #302516}
+  section.content {padding:75px 6%}
+  .login-card {padding:35px 22px}
+  .time-box {width:42%}
+  .hero h2 {font-size:14px;letter-spacing:5px}
+  .bangla {font-size:11px}
+  .date-controls input {width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="orbit one"></div>
+  <div class="orbit two"></div>
+  <div id="particles"></div>
+
+  <form class="login-card" id="loginForm">
+    <div class="crown">♛</div>
+    <p class="eyebrow">A JOURNEY TO REMEMBER</p>
+    <h1>Mir Kasem</h1>
+    <h2>Bhumukhi High School</h2>
+    <div class="gold-line"></div>
+    <h3>SSC BATCH <span>2027</span></h3>
+    <p class="login-copy">Some memories deserve to be protected forever.</p>
+
+    <input type="password" id="password"
+      placeholder="Enter Secret Password" required autocomplete="current-password">
+
+    <p id="loginError"></p>
+    <button class="gold-btn" id="unlock" type="submit">
+      UNLOCK MEMORIES ✦
+    </button>
+    <p class="login-footer">A GOLDEN CHAPTER • 2027</p>
+  </form>
+</div>
+
+<!-- WEBSITE -->
+<main id="website" class="hidden">
+
+<header>
+  <div class="logo">SSC <span>2027</span></div>
+  <button class="menu" id="menuButton" aria-label="Toggle menu">☰</button>
+
+  <nav id="navigation">
+    <a href="#home">Home</a>
+    <a href="#story">Our Story</a>
+    <a href="#memories">Memories</a>
+    <a href="#teachers">Teachers</a>
+    <a href="#countdown">Farewell</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <p class="eyebrow">MIR KASEM BHUMUKHI HIGH SCHOOL PRESENTS</p>
+  <h1>THE LAST <span>CHAPTER</span></h1>
+  <h2>SSC BATCH 2027</h2>
+  <div class="gold-line"></div>
+  <p class="hero-desc">
+    We came as strangers, became a family,
+    and now we leave with a thousand memories.
+  </p>
+  <a class="gold-btn" href="#memories">EXPLORE OUR MEMORIES</a>
+  <p class="hero-bottom">NOT THE END, JUST A NEW BEGINNING ✦</p>
+</section>
+
+<section class="content story reveal" id="story">
+  <p class="eyebrow">OUR STORY</p>
+  <h2>One School. One Family.<br><span>Countless Memories.</span></h2>
+  <p class="section-copy">
+    From our first classroom days to the final bell,
+    every laugh, every friendship, every little moment
+    became a beautiful part of our story.
+    We may leave these classrooms, but these memories
+    will stay with us forever.
+  </p>
+  <div class="quote">
+    “Some goodbyes are not endings. They are memories waiting to be remembered.”
+  </div>
+</section>
+
+<section class="content gallery-section reveal" id="memories">
+  <p class="eyebrow">OUR BEAUTIFUL DAYS</p>
+  <h2>Captured <span>Memories</span></h2>
+  <p class="section-copy">Every picture tells a story.</p>
+
+  <label class="upload">
+    + ADD YOUR MEMORIES
+    <input type="file" id="photoInput" accept="image/*" multiple hidden>
+  </label>
+
+  <p class="note">Photos are saved only in this browser.</p>
+  <div class="gallery" id="gallery">
+    <div class="empty">✦<br>Your memories will appear here.</div>
+  </div>
+</section>
+
+<section class="content teachers reveal" id="teachers">
+  <p class="eyebrow">WITH LOVE AND RESPECT</p>
+  <h2>Our Beloved <span>Teachers</span></h2>
+
+  <div class="teacher-card">
+    <div class="flower">❦</div>
+    <h3>To Our Respected Teachers</h3>
+    <p>
+      Thank you for guiding us, teaching us, believing in us,
+      and helping us become better people. Your lessons will
+      remain in our hearts long after we leave these classrooms.
+    </p>
+    <p class="signature">With endless gratitude — SSC Batch 2027</p>
+  </div>
+</section>
+
+<section class="content countdown-section reveal" id="countdown">
+  <p class="eyebrow">THE MOMENT WE WILL NEVER FORGET</p>
+  <h2>Until We Say <span>Goodbye</span></h2>
+  <p class="section-copy">Choose your farewell date and time.</p>
+
+  <div class="date-controls">
+    <input type="datetime-local" id="farewellDate" step="1">
+    <button class="gold-btn" id="saveDate" type="button">SAVE DATE</button>
+  </div>
+
+  <p id="dateMessage" style="color:#d6ad55;font-size:11px"></p>
+
+  <div class="countdown">
+    <div class="time-box"><strong id="days">00</strong><span>DAYS</span></div>
+    <div class="time-box"><strong id="hours">00</strong><span>HOURS</span></div>
+    <div class="time-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+    <div class="time-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="star">✦</div>
+  <h2>WE WILL MISS YOU</h2>
+  <p>SSC Batch 2027 — Forever a part of this family.</p>
+  <p style="margin-top:25px;font-size:9px">
+    © 2027 Mir Kasem Bhumukhi High School
+  </p>
+</footer>
+</main>
+
+<!-- GOODBYE -->
+<section id="goodbyeScreen" class="hidden">
+  <div id="goodbyeDecor"></div>
+
+  <div class="goodbye-content">
+    <div class="heart">♡</div>
+    <p class="eyebrow">A CHAPTER ENDS, A JOURNEY BEGINS</p>
+    <h1>GOODBYE</h1>
+    <h2>SSC BATCH 2027</h2>
+    <div class="gold-line"></div>
+
+    <p class="bangla">
+      বিদায় মানেই সবকিছুর শেষ নয়।<br>
+      কিছু মানুষ, কিছু মুহূর্ত, কিছু স্মৃতি<br>
+      সারাজীবন হৃদয়ে থেকে যায়।<br><br>
+      হয়তো আর একসাথে প্রতিদিন দেখা হবে না,<br>
+      কিন্তু আমাদের বন্ধুত্ব আর স্মৃতিগুলো<br>
+      কখনো পুরোনো হবে না।
+    </p>
+
+    <h3>WE WILL MEET AGAIN ✦</h3>
+  </div>
+</section>
+
+<script>
+"use strict";
+
+// ===================================
+// PASSWORD LOGIN
+// ===================================
+
+const PASSWORD = "SSC BATCH 27";
+
+const loginScreen = document.getElementById("loginScreen");
+const website = document.getElementById("website");
+const loginCard = document.querySelector(".login-card");
+const passwordInput = document.getElementById("password");
+const loginError = document.getElementById("loginError");
+
+let initialized = false;
+
+function initializeWebsite() {
+  if (initialized) return;
+  initialized = true;
+  renderGallery();
+  startCountdown();
+}
+
+function openWebsite() {
+  loginScreen.classList.add("exit");
+  loginCard.classList.add("exit");
+
+  setTimeout(() => {
+    loginScreen.classList.add("hidden");
+    website.classList.remove("hidden");
+    initializeWebsite();
+  }, 950);
+}
+
+document.getElementById("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  if (passwordInput.value.trim() === PASSWORD) {
+    loginError.style.color = "#d6ad55";
+    loginError.textContent = "ACCESS GRANTED ✦";
+
+    sessionStorage.setItem("ssc27login", "yes");
+    document.getElementById("unlock").disabled = true;
+
+    openWebsite();
+  } else {
+    loginError.style.color = "#ff7777";
+    loginError.textContent = "ACCESS DENIED — WRONG PASSWORD!";
+
+    loginCard.classList.remove("shake");
+    void loginCard.offsetWidth;
+    loginCard.classList.add("shake");
+
+    passwordInput.value = "";
+  }
+});
+
+// RESTORE LOGIN
+if (sessionStorage.getItem("ssc27login") === "yes") {
+  loginScreen.classList.add("hidden");
+  website.classList.remove("hidden");
+  initializeWebsite();
+}
+
+// ===================================
+// PARTICLES
+// ===================================
+
+const particleBox = document.getElementById("particles");
+
+for (let i = 0; i < 35; i++) {
+  const p = document.createElement("span");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "%";
+  p.style.animationDuration = (4 + Math.random() * 5) + "s";
+  p.style.animationDelay = Math.random() * 5 + "s";
+  particleBox.appendChild(p);
+}
+
+// ===================================
+// MOBILE MENU
+// ===================================
+
+const navigation = document.getElementById("navigation");
+
+document.getElementById("menuButton").addEventListener("click", () => {
+  navigation.classList.toggle("open");
+});
+
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => navigation.classList.remove("open"));
+});
+
+// ===================================
+// SCROLL REVEAL
+// ===================================
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+}
+
+// ===================================
+// PHOTO GALLERY
+// ===================================
+
+let photos = [];
+
+try {
+  photos = JSON.parse(localStorage.getItem("ssc27photos") || "[]");
+  if (!Array.isArray(photos)) photos = [];
+} catch (e) {
+  photos = [];
+}
+
+const gallery = document.getElementById("gallery");
+
+function savePhotos() {
+  try {
+    localStorage.setItem("ssc27photos", JSON.stringify(photos));
+    return true;
+  } catch (e) {
+    alert("Browser storage is full. Please remove some photos.");
+    return false;
+  }
+}
+
+function renderGallery() {
+  gallery.innerHTML = "";
+
+  if (!photos.length) {
+    gallery.innerHTML =
+      '<div class="empty">✦<br>Your memories will appear here.</div>';
+    return;
+  }
+
+  photos.forEach((src, index) => {
+    const card = document.createElement("div");
+    card.className = "photo";
+
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "SSC Batch memory";
+    img.loading = "lazy";
+
+    const remove = document.createElement("button");
+    remove.className = "remove";
+    remove.textContent = "✕";
+    remove.setAttribute("aria-label", "Delete photo");
+
+    remove.addEventListener("click", () => {
+      const oldPhotos = [...photos];
+      photos.splice(index, 1);
+
+      if (!savePhotos()) {
+        photos = oldPhotos;
+      }
+
+      renderGallery();
+    });
+
+    card.append(img, remove);
+    gallery.appendChild(card);
+  });
+}
+
+function readAndResize(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onerror = reject;
+
+    reader.onload = () => {
+      const img = new Image();
+
+      img.onerror = reject;
+
+      img.onload = () => {
+        const scale = Math.min(
+          1,
+          1000 / Math.max(img.width, img.height)
+        );
+
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+          reject(new Error("Canvas unavailable"));
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.7));
+      };
+
+      img.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById("photoInput").addEventListener("change", async e => {
+  const input = e.target;
+  const files = Array.from(input.files || [])
+    .filter(file => file.type.startsWith("image/"));
+
+  if (photos.length + files.length > 20) {
+    alert("Maximum 20 photos allowed.");
+    input.value = "";
+    return;
+  }
+
+  const oldPhotos = [...photos];
+
+  for (const file of files) {
+    try {
+      const data = await readAndResize(file);
+      photos.push(data);
+    } catch (err) {
+      alert("Could not load " + file.name);
+    }
+  }
+
+  if (!savePhotos()) {
+    photos = oldPhotos;
+  }
+
+  renderGallery();
+  input.value = "";
+});
+
+// ===================================
+// DATE AND COUNTDOWN
+// ===================================
+
+let target = localStorage.getItem("ssc27date") || "";
+let timer = null;
+let goodbyeStarted = false;
+
+const dateInput = document.getElementById("farewellDate");
+const dateMessage = document.getElementById("dateMessage");
+
+function parseLocalDate(value) {
+  if (!value) return null;
+
+  const match = value.match(
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/
+  );
+
+  if (!match) return null;
+
+  const [, y, mo, d, h, mi, s] = match;
+
+  const date = new Date(
+    Number(y),
+    Number(mo) - 1,
+    Number(d),
+    Number(h),
+    Number(mi),
+    Number(s || 0)
+  );
+
+  // Reject impossible calendar dates
+  if (
+    date.getFullYear() !== Number(y) ||
+    date.getMonth() !== Number(mo) - 1 ||
+    date.getDate() !== Number(d)
+  ) return null;
+
+  return date;
+}
+
+function localDateTimeValue() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2, "0");
+
+  return now.getFullYear() + "-" +
+    pad(now.getMonth() + 1) + "-" +
+    pad(now.getDate()) + "T" +
+    pad(now.getHours()) + ":" +
+    pad(now.getMinutes());
+}
+
+dateInput.min = localDateTimeValue();
+
+if (target) dateInput.value = target;
+
+document.getElementById("saveDate").addEventListener("click", () => {
+  const value = dateInput.value;
+  const date = parseLocalDate(value);
+
+  if (!date || date.getTime() <= Date.now()) {
+    dateMessage.textContent = "Please choose a valid future date and time.";
+    return;
+  }
+
+  target = value;
+
+  try {
+    localStorage.setItem("ssc27date", target);
+  } catch (e) {
+    dateMessage.textContent = "Could not save date in this browser.";
+    return;
+  }
+
+  goodbyeStarted = false;
+  dateMessage.textContent = "Farewell date and time saved ✦";
+
+  startCountdown();
+});
+
+function startCountdown() {
+  if (timer) clearInterval(timer);
+
+  goodbyeStarted = false;
+
+  // Hide old goodbye screen if date was changed
+  document.getElementById("goodbyeScreen").classList.add("hidden");
+  document.getElementById("goodbyeDecor").innerHTML = "";
+
+  updateCountdown();
+
+  if (target && !goodbyeStarted) {
+    timer = setInterval(updateCountdown, 1000);
+  }
+}
+
+function updateCountdown() {
+  const ids = ["days", "hours", "minutes", "seconds"];
+
+  if (!target) {
+    ids.forEach(id => {
+      document.getElementById(id).textContent = "00";
+    });
+    return;
+  }
+
+  const date = parseLocalDate(target);
+
+  if (!date) {
+    dateMessage.textContent = "Invalid date. Please set it again.";
+    return;
+  }
+
+  const diff = date.getTime() - Date.now();
+
+  if (diff <= 0) {
+    ids.forEach(id => {
+      document.getElementById(id).textContent = "00";
+    });
+
+    if (!goodbyeStarted) {
+      goodbyeStarted = true;
+      clearInterval(timer);
+      showGoodbye();
+    }
+
+    return;
+  }
+
+  const values = [
+    Math.floor(diff / 86400000),
+    Math.floor(diff / 3600000) % 24,
+    Math.floor(diff / 60000) % 60,
+    Math.floor(diff / 1000) % 60
+  ];
+
+  ids.forEach((id, i) => {
+    document.getElementById(id).textContent =
+      String(values[i]).padStart(2, "0");
+  });
+}
+
+// ===================================
+// GOODBYE ANIMATION
+// ===================================
+
+function showGoodbye() {
+  const screen = document.getElementById("goodbyeScreen");
+  const decor = document.getElementById("goodbyeDecor");
+
+  if (!screen.classList.contains("hidden")) return;
+
+  screen.classList.remove("hidden");
+
+  const colors = ["#d6ad55", "#f5e5b4", "#ffffff", "#a77c31"];
+
+  for (let i = 0; i < 100; i++) {
+    const c = document.createElement("span");
+
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "%";
+    c.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDuration = (3 + Math.random() * 5) + "s";
+    c.style.animationDelay = Math.random() * 3 + "s";
+
+    decor.appendChild(c);
+  }
+
+  const flowers = ["✿", "❀", "✾", "❁"];
+
+  for (let i = 0; i < 30; i++) {
+    const f = document.createElement("span");
+
+    f.className = "falling-flower";
+    f.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+    f.style.left = Math.random() * 100 + "%";
+    f.style.color = colors[Math.floor(Math.random() * colors.length)];
+    f.style.animationDuration = (5 + Math.random() * 5) + "s";
+    f.style.animationDelay = Math.random() * 4 + "s";
+
+    decor.appendChild(f);
+  }
+}
+</script>
+
+</body>
+</html>
